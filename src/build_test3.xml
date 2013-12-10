@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<project name="antPro3" default="war" basedir=".">
+	<property file="build.properties"/>
+	<property  name ="classes" value ="${basedir}/build/classes"/>
+    <property  name ="build" value ="${basedir}/build"/>
+    <property  name ="lib" value ="../WebContent/WEB-INF/lib"/>
+    <property  name ="tomcat.lib" value ="D:\apache-tomcat-6.0.18\apache-tomcat-6.0.18\lib"/>
+    <path id="project.class.path">
+	  	<fileset dir="${lib}">
+	  		<include name="*.jar"/>
+	  	</fileset>
+	</path>
+	<path id="project.tomcat.path">
+	  	<fileset dir="${tomcat.lib}">
+	  		<include name="*.jar"/>
+	  	</fileset>
+	</path>
+    <!-- 删除build目录 -->
+    <target name="clean">
+    	<delete dir="${build.dir}"/>
+    </target>
+    
+    <!--  建立build/classes 路径，并编译class 文件到build/classes 路径下-->
+     <target name ="compile"  depends ="clean">
+        <mkdir dir ="${build.dir}"/>
+        <javac srcdir ="${basedir}"  destdir ="${build.dir}" >
+        	<compilerarg line="-encoding GBK"/>
+			<classpath refid="project.class.path"/>
+			<classpath refid="project.tomcat.path"/>
+        </javac>
+        <copy todir="${web_base}/WEB-INF/classes/META-INF">
+			<fileset dir="${basedir}/META-INF"/>
+		</copy>
+     </target>
+     
+     <!--  打war 包-->
+     <target name ="war" depends ="compile">
+            <war destfile ="${build.dir}/WebTest.war"  webxml ="${web_xml}">
+            <!--  拷贝WebRoot 下除了WEB-INF 和META-INF 的两个文件夹-->
+             <fileset dir ="${web_base}"  includes ="**/*.*"/>
+            <!--  拷贝lib 目录下的jar 包-->
+            <lib dir ="${lib}"/>
+            <!--  拷贝build/classes 下的class 文件-->
+            <classes dir ="${build.dir}"/>
+        </war>
+     </target>
+</project>

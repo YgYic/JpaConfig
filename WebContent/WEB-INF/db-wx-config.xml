@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd   
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd   
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+	
+	<bean id="DataSource195"
+		class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName"
+			value="org.gjt.mm.mysql.Driver" />
+		<property name="url"
+			value="jdbc:mysql://localhost:3306/wx365?useUnicode=true&amp;characterEncoding=ISO-8859-1&amp;zeroDateTimeBehavior=convertToNull" />
+		<property name="username" value="wx365" />
+		<property name="password" value="z1f7r3" />
+		<property name="validationQuery" value="SELECT 1"></property>
+		<property name="testOnBorrow" value="true"></property>
+	</bean>
+
+	<bean id="DataSource52"
+		class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName"
+			value="org.gjt.mm.mysql.Driver" />
+		<property name="url"
+			value="jdbc:mysql://localhost:3306/smslog?useUnicode=true&amp;characterEncoding=ISO-8859-1&amp;zeroDateTimeBehavior=convertToNull" />
+		<property name="username" value="pay102" />
+		<property name="password" value="z1f7r3" />
+		<property name="validationQuery" value="SELECT 1"></property>
+		<property name="testOnBorrow" value="true"></property>
+	</bean>
+
+	<bean id="dataAccess195"
+		class="accelet.commons.database.DataAccess">
+		<property name="dataSource">
+			<ref local="DataSource195" />
+		</property>
+	</bean>
+
+	<bean id="dataAccess52"
+		class="accelet.commons.database.DataAccess">
+		<property name="dataSource">
+			<ref local="DataSource52" />
+		</property>
+	</bean> 
+</beans>

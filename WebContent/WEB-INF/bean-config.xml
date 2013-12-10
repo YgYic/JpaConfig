@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd   
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd   
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+
+	<bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" />
+
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/WEB-INF/jsp/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+
+	<bean id="loginController" class="controller.LoginController">
+		<property name="domainInfoDAO">
+			<ref bean="domainInfoDAO" />
+		</property>
+		<property name="loginView">
+			<value>login</value>
+		</property>
+	</bean>
+	
+	<bean id="testController" class="controller.TestController">
+		<property name="dataSource1">
+			<ref bean="dataSource1" />
+		</property>
+		<property name="loginView">
+			<value>test</value>
+		</property>
+	</bean>
+	
+	<bean id="dsd" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="login.do">loginController</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="sss" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="test.do">testController</prop>
+			</props>
+		</property>
+	</bean>
+	
+</beans>

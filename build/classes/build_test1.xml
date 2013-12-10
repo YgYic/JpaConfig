@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<project name="antPro" default="getBaseDir" basedir=".">
+	<property file="build.properties"/>
+	<target name="getBaseDir" depends="targetA, targetB">
+		<echo message="The base dir is :${basedir}"/>
+	</target>
+	<target name="targetA" if="ant.java.version">
+		<echo message="Java Version:${ant.java.version}"/>
+	</target>
+	<target name="targetB" unless="philander">
+		<copy todir="./dao">
+			<fileset dir="./test"/>
+		</copy>
+		<description>
+			a depend example!
+		</description>
+		<echo message="two depends ${base} ${path.separator}"/>
+	</target>
+</project>

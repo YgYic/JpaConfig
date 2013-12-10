@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<project name="antPro2" default="jar" basedir=".">
+	<property file="build.properties"/>
+	<target name="clear">
+		<delete dir="${build.dir}"/>
+	</target>
+	<target name="t" depends="pub">
+		<mkdir dir="${build.dir}"/>
+		<javac srcdir="${src.dir}/test" destdir="${build.dir}">
+			 <compilerarg    line="-encoding GBK "/>
+		</javac>
+	</target>
+	<target name="pub" depends="clear">
+		<mkdir dir="${build.dir}"/>
+		<javac srcdir="${src.dir}/com/lm/pub" destdir="${build.dir}">
+			 <compilerarg    line="-encoding GBK "/>
+		</javac>
+	</target>
+	<target name="run_t" depends="t">
+		<java classname="test.T">
+			<classpath>
+               <pathelement path="${build.dir}"/>
+            </classpath>
+		</java>
+	</target>
+	<target name="jar" depends="run_t">
+		<jar destfile="${build.dir}/jpaConfig.jar" basedir="${build.dir}">
+			<manifest>	
+				<attribute name="Main-class" value="test.T"/>
+			</manifest>
+		</jar> 
+	</target>
+</project>

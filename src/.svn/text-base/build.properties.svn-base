@@ -1,0 +1,5 @@
+test1_base=./dir
+build.dir=../bin
+src.dir=.
+web_xml=D:/workspace20100111/JpaConfig/WebContent/WEB-INF/web.xml
+web_base=D:/workspace20100111/JpaConfig/WebContent
