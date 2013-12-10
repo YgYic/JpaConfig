@@ -1,0 +1,4 @@
+JpaConfig
+=========
+
+testForSomeProperty
